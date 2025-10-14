@@ -22,7 +22,7 @@ public class User {
             String password,
             String email,
             String phone,
-            int age
+            int    age
     ) {
         this.username = username;
         this.password = password;
