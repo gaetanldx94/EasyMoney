@@ -29,14 +29,19 @@ public class Exchange {
     private LocalDateTime updatedAt = LocalDateTime.now();
 
     public Exchange(
-            Currency   fromCurrency,
-            Currency   toCurrency,
-            BigDecimal rate
+            Currency fromCurrency,
+            Currency toCurrency,
+            BigDecimal rate,
+            Account account,
+            BigDecimal convertedAmount
     ) {
         this.fromCurrency = fromCurrency;
-        this.toCurrency   = toCurrency;
-        this.rate         = rate;
+        this.toCurrency = toCurrency;
+        this.rate = rate;
+        this.account = account;
+        this.convertedAmount = convertedAmount;
     }
+
 
     public Currency getFromCurrency  () { return fromCurrency; }
     public Currency getToCurrency    () { return toCurrency;   }

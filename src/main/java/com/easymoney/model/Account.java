@@ -9,24 +9,28 @@ public class Account {
     private long id;
 
     private String iban;
-    private String currency;
+
+    @Enumerated(EnumType.STRING)
+    private Currency currency;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
 
     public Account(
-            String currency,
-            User   user
+            Currency currency,
+            User     user,
+            String   iban
     ) {
         this.currency = currency;
         this.user     = user;
+        this.iban     = iban;
     }
 
-    public long   getId      () { return id;       }
-    public String getIban    () { return iban;     }
-    public String getCurrency() { return currency; }
-    public User   getUser    () { return user;     }
+    public long     getId      () { return id;       }
+    public String   getIban    () { return iban;     }
+    public Currency getCurrency() { return currency; }
+    public User     getUser    () { return user;     }
 
-    public void setCurrency(String currency) { this.currency = currency; }
+    public void setCurrency(Currency currency) { this.currency = currency; }
 }

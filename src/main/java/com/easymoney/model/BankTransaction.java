@@ -13,7 +13,9 @@ public class BankTransaction {
     private long id;
 
     private BigDecimal amount;
-    private String currency;
+
+    @Enumerated(EnumType.STRING)
+    private Currency currency;
 
     @Enumerated(EnumType.STRING)
     private TransactionType type;
@@ -27,7 +29,7 @@ public class BankTransaction {
 
     public BankTransaction(
             BigDecimal      amount,
-            String          currency,
+            Currency        currency,
             TransactionType type,
             String          description,
             Account         account
@@ -41,7 +43,7 @@ public class BankTransaction {
 
     public long            getId         () { return id;          }
     public BigDecimal      getAmount     () { return amount;      }
-    public String          getCurrency   () { return currency;    }
+    public Currency        getCurrency   () { return currency;    }
     public String          getDescription() { return description; }
     public TransactionType getType       () { return type;        }
     public LocalDateTime   getDate       () { return date;        }
