@@ -1,13 +1,12 @@
 package com.easymoney.service;
 
 import com.easymoney.model.Account;
-import com.easymoney.model.Currency;
+import com.easymoney.model.type.Currency;
 import com.easymoney.model.Exchange;
 import com.easymoney.repository.ExchangeRepository;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Service

@@ -2,7 +2,8 @@ package com.easymoney.service;
 
 import com.easymoney.model.Account;
 import com.easymoney.model.BankTransaction;
-import com.easymoney.model.TransactionType;
+import com.easymoney.model.type.TransactionStatus;
+import com.easymoney.model.type.TransactionType;
 import com.easymoney.repository.AccountRepository;
 import com.easymoney.repository.BankTransactionRepository;
 import org.springframework.stereotype.Service;
@@ -74,7 +75,21 @@ public class BankTransactionService {
         List<BankTransaction> transactions = transactionRepository.findByAccount(account);
 
         return transactions.stream()
-                .map(t -> t.getType() == TransactionType.DEPOSIT ? t.getAmount() : t.getAmount().negate())
+                .filter(t -> t.getStatus() == TransactionStatus.SUCCESS)
+                .map(t -> {
+                    switch (t.getType()) {
+                        case DEPOSIT:
+                            return t.getAmount();
+                        case WITHDRAW:
+                            return t.getAmount().negate();
+                        case TRANSFER:
+                            return t.getAccount().equals(account)
+                                    ? t.getAmount()
+                                    : t.getAmount().negate();
+                        default:
+                            return BigDecimal.ZERO;
+                    }
+                })
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
     }
 }

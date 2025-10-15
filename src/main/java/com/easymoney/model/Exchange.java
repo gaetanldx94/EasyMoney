@@ -1,5 +1,6 @@
 package com.easymoney.model;
 
+import com.easymoney.model.type.Currency;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
@@ -13,7 +14,7 @@ public class Exchange {
     private Long id;
 
     @Enumerated(EnumType.STRING)
-    private Currency      fromCurrency;
+    private Currency fromCurrency;
 
     @Enumerated(EnumType.STRING)
     private Currency      toCurrency;
@@ -27,6 +28,8 @@ public class Exchange {
 
     private BigDecimal    rate;
     private LocalDateTime updatedAt = LocalDateTime.now();
+
+    public Exchange() {}
 
     public Exchange(
             Currency fromCurrency,

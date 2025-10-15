@@ -1,7 +1,7 @@
 package com.easymoney.service;
 
 import com.easymoney.model.Account;
-import com.easymoney.model.Currency;
+import com.easymoney.model.type.Currency;
 import com.easymoney.model.User;
 import com.easymoney.repository.AccountRepository;
 import com.easymoney.repository.UserRepository;
@@ -21,6 +21,11 @@ public class AccountService {
 
     @Autowired
     private IbanService ibanService;
+
+    public AccountService(AccountRepository accountRepository, UserRepository userRepository) {
+        this.accountRepository = accountRepository;
+        this.userRepository = userRepository;
+    }
 
     public Account createAccount(String userUuid, Currency currency) {
         User user = userRepository.findById(userUuid).orElseThrow(() -> new IllegalArgumentException("User not found"));

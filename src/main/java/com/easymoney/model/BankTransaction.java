@@ -1,5 +1,8 @@
 package com.easymoney.model;
 
+import com.easymoney.model.type.Currency;
+import com.easymoney.model.type.TransactionStatus;
+import com.easymoney.model.type.TransactionType;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
@@ -23,9 +26,15 @@ public class BankTransaction {
     private String description;
     private LocalDateTime date = LocalDateTime.now();
 
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private TransactionStatus status = TransactionStatus.SUCCESS;
+
     @ManyToOne
     @JoinColumn(name = "account_id")
     private Account account;
+
+    public BankTransaction() {}
 
     public BankTransaction(
             BigDecimal      amount,
@@ -41,11 +50,14 @@ public class BankTransaction {
         this.account     = account;
     }
 
-    public long            getId         () { return id;          }
-    public BigDecimal      getAmount     () { return amount;      }
-    public Currency        getCurrency   () { return currency;    }
-    public String          getDescription() { return description; }
-    public TransactionType getType       () { return type;        }
-    public LocalDateTime   getDate       () { return date;        }
-    public Account         getAccount    () { return account;     }
+    public long              getId         () { return id;          }
+    public BigDecimal        getAmount     () { return amount;      }
+    public Currency          getCurrency   () { return currency;    }
+    public String            getDescription() { return description; }
+    public TransactionType   getType       () { return type;        }
+    public LocalDateTime     getDate       () { return date;        }
+    public Account           getAccount    () { return account;     }
+    public TransactionStatus getStatus     () { return status;      }
+
+    public void setStatus(TransactionStatus status) { this.status = status; }
 }

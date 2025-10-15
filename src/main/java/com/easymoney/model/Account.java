@@ -1,5 +1,6 @@
 package com.easymoney.model;
 
+import com.easymoney.model.type.Currency;
 import jakarta.persistence.*;
 
 @Entity
@@ -16,6 +17,8 @@ public class Account {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
+
+    public Account() {}
 
     public Account(
             Currency currency,

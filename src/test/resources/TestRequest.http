@@ -1,0 +1,59 @@
+### Create a new user
+POST http://localhost:8080/api/users
+Content-Type: application/json
+
+{
+  "username": "john_doe",
+  "password": "password123",
+  "email": "john@example.com",
+  "phone": "+33123456789",
+  "age": 30
+}
+
+### Get all users
+GET http://localhost:8080/api/users
+
+### Get user by UUID
+GET http://localhost:8080/api/users/{{USER_UUID}}
+
+### Create an account for the user
+POST http://localhost:8080/api/accounts?userUuid={{USER_UUID}}&currency=EUR
+
+### Get account by ID
+GET http://localhost:8080/api/accounts/{{ACCOUNT_ID}}
+
+### Get all accounts for a user
+GET http://localhost:8080/api/accounts/user/{{USER_UUID}}
+
+### Deposit into account
+POST http://localhost:8080/api/transactions/deposit?accountId={{ACCOUNT_ID}}&amount=1000&description=InitialDeposit
+
+### Withdraw from account
+POST http://localhost:8080/api/transactions/withdraw?accountId={{ACCOUNT_ID}}&amount=200&description=ATMWithdrawal
+
+### Create a second user
+POST http://localhost:8080/api/users
+Content-Type: application/json
+
+{
+  "username": "jane_doe",
+  "password": "password456",
+  "email": "jane@example.com",
+  "phone": "+33987654321",
+  "age": 28
+}
+
+### Create account for second user
+POST http://localhost:8080/api/accounts?userUuid={{USER2_UUID}}&currency=EUR
+
+### Transfer between accounts
+POST http://localhost:8080/api/transactions/transfer?fromAccountId={{ACCOUNT_ID}}&toAccountId={{ACCOUNT2_ID}}&amount=150&description=Payment
+
+### Get account balance
+GET http://localhost:8080/api/transactions/account/{{ACCOUNT_ID}}/balance
+
+### Create an exchange
+POST http://localhost:8080/api/exchanges?accountId={{ACCOUNT_ID}}&from=EUR&to=USD&rate=1.1&amount=100
+
+### Get exchanges for account
+GET http://localhost:8080/api/exchanges/account/{{ACCOUNT_ID}}

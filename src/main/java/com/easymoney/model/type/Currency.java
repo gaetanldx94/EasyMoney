@@ -1,4 +1,4 @@
-package com.easymoney.model;
+package com.easymoney.model.type;
 
 public enum Currency {
     EUR, // Euro
